@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinho Barber - Planos de Assinatura</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom gradient for the hero section */
+        .hero-gradient {
+            background: radial-gradient(ellipse at top, #1a202c, #111827);
+        }
+        /* A subtle glow for the featured plan */
+        .featured-glow {
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.4), 0 0 30px rgba(217, 119, 6, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Header Navigation -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-amber-500">Kinho Barber</h1>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#planos" class="text-gray-300 hover:text-amber-500 transition-colors duration-300">Planos</a>
+                <a href="#" class="text-gray-300 hover:text-amber-500 transition-colors duration-300">Sobre</a>
+                <a href="#" class="text-gray-300 hover:text-amber-500 transition-colors duration-300">Contato</a>
+            </nav>
+            <a href="#" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg transition-colors duration-300">
+                Login Cliente
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-gradient text-center py-20 md:py-32 px-6">
+            <div class="container mx-auto">
+                <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                    Seu Estilo, <span class="text-amber-500">Sempre em Dia.</span>
+                </h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
+                    Chega de se preocupar com agendamentos e pagamentos a cada corte. Com nossos planos, você garante seu visual impecável o mês todo com um valor fixo.
+                </p>
+                <a href="#planos" class="mt-10 inline-block bg-amber-500 text-gray-900 font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:bg-amber-400 transform hover:scale-105 transition-all duration-300">
+                    Conheça os Planos
+                </a>
+            </div>
+        </section>
+
+        <!-- Plans Section -->
+        <section id="planos" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-bold tracking-tight">Escolha o plano perfeito para você</h3>
+                    <p class="mt-4 text-lg text-gray-400">Simples, flexível e sem surpresas no final do mês.</p>
+                </div>
+                
+                <!-- Responsive Grid for Plans -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    
+                    <!-- Plan Card 1: Básico -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 flex flex-col transform transition-all duration-300 hover:scale-105 hover:border-amber-500 hover:shadow-2xl">
+                        <h4 class="text-2xl font-bold">Plano Bronze</h4>
+                        <p class="mt-1 text-gray-400">Apenas Corte</p>
+                        
+                        <div class="my-8">
+                            <span class="text-5xl font-extrabold">R$50</span>
+                            <span class="text-gray-400 text-lg">/mês</span>
+                        </div>
+                        
+                        <ul class="space-y-4 text-gray-300 mb-10 flex-grow">
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>2 cortes de cabelo por mês</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Acabamento com navalha</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Lavagem simples</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#" class="w-full text-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition-colors duration-300">
+                            Assinar Agora
+                        </a>
+                    </div>
+                    
+                    <!-- Plan Card 2: Destaque (Featured) -->
+                    <div class="relative bg-gray-800 border-2 border-amber-500 rounded-xl p-8 flex flex-col transform scale-105 shadow-2xl featured-glow">
+                        <span class="absolute top-0 -translate-y-1/2 bg-amber-500 text-gray-900 text-sm font-bold px-4 py-1 rounded-full self-center">MAIS POPULAR</span>
+                        
+                        <h4 class="text-2xl font-bold text-amber-400">Plano Prata</h4>
+                        <p class="mt-1 text-gray-400">Corte & Barba</p>
+                        
+                        <div class="my-8">
+                            <span class="text-5xl font-extrabold">R$80</span>
+                            <span class="text-gray-400 text-lg">/mês</span>
+                        </div>
+                        
+                        <ul class="space-y-4 text-gray-300 mb-10 flex-grow">
+                             <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>4 serviços (corte ou barba)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Toalha quente e massagem facial</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Lavagem e modelagem com produtos premium</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>1 bebida cortesia (água, refri ou cerveja)</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#" class="w-full text-center bg-amber-500 hover:bg-amber-400 text-gray-900 font-semibold py-3 rounded-lg transition-colors duration-300">
+                            Assinar Agora
+                        </a>
+                    </div>
+                    
+                    <!-- Plan Card 3: VIP -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 flex flex-col transform transition-all duration-300 hover:scale-105 hover:border-amber-500 hover:shadow-2xl">
+                        <h4 class="text-2xl font-bold">Plano Ouro</h4>
+                        <p class="mt-1 text-gray-400">Corte, Barba & Bigode</p>
+                        
+                        <div class="my-8">
+                            <span class="text-5xl font-extrabold">R$120</span>
+                            <span class="text-gray-400 text-lg">/mês</span>
+                        </div>
+                        
+                        <ul class="space-y-4 text-gray-300 mb-10 flex-grow">
+                           <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Serviços ilimitados*</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Todos os benefícios do Plano Prata</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Design completo de barba e bigode</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Prioridade máxima nos agendamentos</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#" class="w-full text-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition-colors duration-300">
+                            Assinar Agora
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Kinho Barber. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">*Serviços ilimitados sujeitos à política de uso justo e disponibilidade de agenda.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
