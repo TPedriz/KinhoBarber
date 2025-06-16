@@ -1,0 +1,42 @@
+{
+  "name": "kinhobarber",
+  "version": "1.0.0",
+  "description": "Projeto web de gestão de assinaturas de planos para uma barbearia. Utilizando principalmente Node.js e MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:seed": "npx prisma db seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TPedriz/KinhoBarber.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TPedriz/KinhoBarber/issues"
+  },
+  "homepage": "https://github.com/TPedriz/KinhoBarber#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "@prisma/client": "^5.15.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": { 
+    "prisma": "^6.9.0",
+    "nodemon": "^3.1.2"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+  
+
+}

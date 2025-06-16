@@ -1,0 +1,28 @@
+/* @tailwind directives removed because Tailwind CSS is not configured in the build process */
+
+body {
+  font-family: 'Inter', sans-serif; /* Configure a fonte no _app.js ou _document.js se preferir */
+}
+
+@layer base {
+  /* Estilos globais */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    color: #212529; /* Cor do texto escuro */
+  }
+
+  a {
+    color: #007bff; /* Cor dos links */
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+  }
+}
