@@ -1,16 +1,16 @@
-const express = require('express');
-const cors = require('cors');
+import express, { json } from 'express';
+import cors from 'cors';
 require('dotenv').config();
 
-const authRoutes = require('./src/routes/authRoutes');
-const planRoutes = require('./src/routes/planRoutes');
-const subscriptionRoutes = require('./src/routes/subscriptionRoutes');
+import authRoutes from './src/routes/authRoutes';
+import planRoutes from './src/routes/planRoutes';
+import subscriptionRoutes from './src/routes/subscriptionRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3333;
 
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 app.get('/', (req, res) => res.json({ message: 'API Kinho Barber v1.0' }));
 
@@ -20,8 +20,9 @@ app.use('/api/subscriptions', subscriptionRoutes);
 
 app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
 
+export default app; // Export the app for testing purposes
+Exporta(); // Export the PORT for testing purposes    
 
-// ===== ARQUIVO: src/lib/prisma.js =====
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-module.exports = prisma;
+function Exporta() {
+    return { PORT };
+}
