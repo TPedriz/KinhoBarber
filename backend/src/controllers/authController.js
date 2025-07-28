@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
         const { password: _, ...userWithoutPassword } = user;
         res.status(201).json(userWithoutPassword);
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao registrar usuário.' });
+        res.status(500).json({ error: 'Erro ao registrar usuário.' })
     }
 };
 
