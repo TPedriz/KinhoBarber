@@ -3,188 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kinho Barber - Planos de Assinatura</title>
+    <title>Kinho Barber - Landing Pages</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
-    <!-- Custom Styles -->
+    <!-- Custom Styles & Theme Logic -->
     <style>
+        /* Base font */
         body {
             font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-    
-        /* Custom gradient for the hero section */
-        .hero-gradient {
-            background: radial-gradient(ellipse at top, #1a202c, #111827);
+
+        /* Background Carousel Styling */
+        #bg-carousel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            transition: background-image 1.5s ease-in-out;
         }
-        /* A subtle glow for the featured plan */
-        .featured-glow {
-            box-shadow: 0 0 15px rgba(217, 119, 6, 0.4), 0 0 30px rgba(217, 119, 6, 0.2);
+        #bg-carousel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: rgba(17, 24, 39, 0.85); /* Default overlay */
+            transition: background-color 0.5s ease;
+        }
+
+        /* Parallax Effect Section */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* --- THEME SPECIFIC STYLES --- */
+        
+        /* Model 1: Clássico Moderno */
+        .theme-classic h1, .theme-classic h2, .theme-classic h3, .theme-classic h4 { font-family: 'Playfair Display', serif; }
+        .theme-classic #bg-carousel-overlay { background-color: rgba(17, 24, 39, 0.85); }
+        .theme-classic .accent-color { color: #f59e0b; } /* Amber */
+        .theme-classic .btn-primary { @apply bg-amber-500 text-gray-900 hover:bg-amber-400; }
+        .theme-classic .hero-content { @apply text-center; }
+
+        /* Model 2: Vibe Urbana */
+        .theme-urban h1, .theme-urban h2, .theme-urban h3, .theme-urban h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px; }
+        .theme-urban #bg-carousel-overlay { background-color: rgba(10, 10, 20, 0.9); }
+        .theme-urban .accent-color { color: #22d3ee; } /* Cyan */
+        .theme-urban .btn-primary { @apply bg-cyan-500 text-gray-900 hover:bg-cyan-400; }
+        .theme-urban .section-title { @apply text-5xl md:text-7xl; }
+        .theme-urban .hero-content { @apply text-center; }
+
+        /* Model 3: Aconchego Rústico */
+        .theme-rustic h1, .theme-rustic h2, .theme-rustic h3, .theme-rustic h4 { font-family: 'Inter', sans-serif; font-weight: 900; }
+        .theme-rustic #bg-carousel-overlay { background: linear-gradient(rgba(30, 20, 10, 0.8), rgba(30, 20, 10, 0.95)); }
+        .theme-rustic .accent-color { color: #fcd34d; } /* Amber-300 */
+        .theme-rustic .btn-primary { @apply bg-yellow-800 text-white hover:bg-yellow-700; }
+        .theme-rustic body { background-color: #1e140a; }
+        .theme-rustic .hero-content { @apply text-center; }
+
+        /* Model 4: Ninja (Based on user image) */
+        .theme-ninja h1, .theme-ninja h2, .theme-ninja h3, .theme-ninja h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
+        .theme-ninja #bg-carousel-overlay { background-color: rgba(10, 10, 10, 0.75); }
+        .theme-ninja .accent-color { color: #FF4D00; } /* Orange-Red */
+        .theme-ninja .btn-primary { @apply bg-[#FF4D00] text-white hover:bg-[#E64400] rounded-none; }
+        .theme-ninja .hero-content { @apply text-left; }
+        .theme-ninja .service-card { @apply bg-gray-800/50 border border-gray-700 p-6 flex items-center gap-6; }
+        .theme-ninja .service-card-icon { @apply w-12 h-12 flex-shrink-0; }
+
+        /* Active button style for theme switcher */
+        .theme-switcher button.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border-color: white;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-white transition-all duration-500">
 
-    <!-- Header Navigation -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-amber-500">Kinho Barber</h1>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="#planos" class="text-gray-300 hover:text-amber-500 transition-colors duration-300">Planos</a>
-                <a href="#" class="text-gray-300 hover:text-amber-500 transition-colors duration-300">Sobre</a>
-                <a href="#" class="text-gray-300 hover:text-amber-500 transition-colors duration-300">Contato</a>
+    <!-- Background Carousel Container -->
+    <div id="bg-carousel"></div>
+    <div id="bg-carousel-overlay"></div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher fixed bottom-5 right-5 z-50 bg-gray-800/50 backdrop-blur-sm p-2 rounded-lg shadow-lg flex flex-col gap-2">
+        <button data-theme="classic" class="w-10 h-10 rounded-full bg-gray-900 border-2 border-amber-500 transition-all duration-300" title="Clássico Moderno"></button>
+        <button data-theme="urban" class="w-10 h-10 rounded-full bg-gray-900 border-2 border-cyan-500 transition-all duration-300" title="Vibe Urbana"></button>
+        <button data-theme="rustic" class="w-10 h-10 rounded-full bg-[#1e140a] border-2 border-yellow-800 transition-all duration-300" title="Aconchego Rústico"></button>
+        <button data-theme="ninja" class="w-10 h-10 rounded-full bg-black border-2 border-[#FF4D00] transition-all duration-300 active" title="Estilo Ninja"></button>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-transparent">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center border-b border-white/10">
+            <h1 class="text-3xl font-bold accent-color">Kinho Barber</h1>
+            <nav class="hidden md:flex space-x-8 items-center text-lg">
+                <a href="#equipe" class="text-gray-300 hover:accent-color transition-colors">Nossa Equipe</a>
+                <a href="#servicos" class="text-gray-300 hover:accent-color transition-colors">Serviços</a>
+                <a href="#contato" class="text-gray-300 hover:accent-color transition-colors">Contato</a>
             </nav>
-            <a href="#" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg transition-colors duration-300">
-                Login Cliente
+            <a href="/planos" class="btn-primary font-bold px-6 py-2 shadow-lg transform hover:scale-105 transition-transform">
+                Ver Planos
             </a>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-gradient text-center py-20 md:py-32 px-6">
-            <div class="container mx-auto">
-                <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
-                    Seu Estilo, <span class="text-amber-500">Sempre em Dia.</span>
+        <section id="hero" class="h-[80vh] flex items-center">
+            <div class="container mx-auto px-6 hero-content">
+                <h2 class="text-6xl md:text-8xl lg:text-9xl font-extrabold leading-tight">
+                    Barbearia Kinho
                 </h2>
-                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
-                    Chega de se preocupar com agendamentos e pagamentos a cada corte. Com nossos planos, você garante seu visual impecável o mês todo com um valor fixo.
+                <p class="mt-4 max-w-lg text-lg md:text-xl text-gray-200">
+                    Tradição e modernidade se encontram para oferecer o corte perfeito. Conheça nossos serviços e planos de assinatura.
                 </p>
-                <a href="#planos" class="mt-10 inline-block bg-amber-500 text-gray-900 font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:bg-amber-400 transform hover:scale-105 transition-all duration-300">
-                    Conheça os Planos
+                <a href="#servicos" class="btn-primary mt-8 inline-block text-xl font-bold px-10 py-3 shadow-xl transform hover:scale-105 transition-transform">
+                    Nossos Serviços
                 </a>
             </div>
         </section>
 
-        <!-- Plans Section -->
-        <section id="planos" class="py-20 bg-gray-900">
+        <!-- Nossa Equipe Section -->
+        <section id="equipe" class="py-20 md:py-32 bg-gray-900/80 backdrop-blur-sm">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h3 class="text-4xl font-bold tracking-tight">Escolha o plano perfeito para você</h3>
-                    <p class="mt-4 text-lg text-gray-400">Simples, flexível e sem surpresas no final do mês.</p>
+                <div class="text-center">
+                    <h3 class="section-title text-4xl md:text-6xl font-bold mb-16">Nossa <span class="accent-color">Equipe</span></h3>
                 </div>
                 
-                <!-- Responsive Grid for Plans -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    
-                    <!-- Plan Card 1: Básico -->
-                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 flex flex-col transform transition-all duration-300 hover:scale-105 hover:border-amber-500 hover:shadow-2xl">
-                        <h4 class="text-2xl font-bold">Plano Bronze</h4>
-                        <p class="mt-1 text-gray-400">Apenas Corte</p>
-                        
-                        <div class="my-8">
-                            <span class="text-5xl font-extrabold">R$50</span>
-                            <span class="text-gray-400 text-lg">/mês</span>
-                        </div>
-                        
-                        <ul class="space-y-4 text-gray-300 mb-10 flex-grow">
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>2 cortes de cabelo por mês</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Acabamento com navalha</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Lavagem simples</span>
-                            </li>
-                        </ul>
-                        
-                        <a href="#" class="w-full text-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition-colors duration-300">
-                            Assinar Agora
-                        </a>
+                <!-- Barbeiro Kinho -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+                    <div class="text-center md:text-left">
+                        <h4 class="text-4xl font-bold mb-4">Kinho - O Mestre da Tradição</h4>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            Com mais de 15 anos de experiência, Kinho é um mestre da tesoura e da navalha. Sua paixão não é apenas cortar cabelo, mas entender o estilo de cada cliente e transformá-lo em uma obra de arte.
+                        </p>
+                        <p class="text-gray-400 italic">"Para mim, barbearia é ritual. É o momento que o homem tira para cuidar de si mesmo. Meu trabalho é garantir que esse momento seja impecável."</p>
                     </div>
-                    
-                    <!-- Plan Card 2: Destaque (Featured) -->
-                    <div class="relative bg-gray-800 border-2 border-amber-500 rounded-xl p-8 flex flex-col transform scale-105 shadow-2xl featured-glow">
-                        <span class="absolute top-0 -translate-y-1/2 bg-amber-500 text-gray-900 text-sm font-bold px-4 py-1 rounded-full self-center">MAIS POPULAR</span>
-                        
-                        <h4 class="text-2xl font-bold text-amber-400">Plano Prata</h4>
-                        <p class="mt-1 text-gray-400">Corte & Barba</p>
-                        
-                        <div class="my-8">
-                            <span class="text-5xl font-extrabold">R$80</span>
-                            <span class="text-gray-400 text-lg">/mês</span>
-                        </div>
-                        
-                        <ul class="space-y-4 text-gray-300 mb-10 flex-grow">
-                             <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>4 serviços (corte ou barba)</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Toalha quente e massagem facial</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Lavagem e modelagem com produtos premium</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>1 bebida cortesia (água, refri ou cerveja)</span>
-                            </li>
-                        </ul>
-                        
-                        <a href="#" class="w-full text-center bg-amber-500 hover:bg-amber-400 text-gray-900 font-semibold py-3 rounded-lg transition-colors duration-300">
-                            Assinar Agora
-                        </a>
+                    <div>
+                        <img src="https://placehold.co/600x700/2d3748/ffffff?text=Foto+do+Barbeiro+Kinho" 
+                             alt="Foto do barbeiro Kinho"
+                             class="rounded-lg shadow-2xl w-full h-auto object-cover mx-auto max-w-md">
                     </div>
-                    
-                    <!-- Plan Card 3: VIP -->
-                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 flex flex-col transform transition-all duration-300 hover:scale-105 hover:border-amber-500 hover:shadow-2xl">
-                        <h4 class="text-2xl font-bold">Plano Ouro</h4>
-                        <p class="mt-1 text-gray-400">Corte, Barba & Bigode</p>
-                        
-                        <div class="my-8">
-                            <span class="text-5xl font-extrabold">R$120</span>
-                            <span class="text-gray-400 text-lg">/mês</span>
-                        </div>
-                        
-                        <ul class="space-y-4 text-gray-300 mb-10 flex-grow">
-                           <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Serviços ilimitados*</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Todos os benefícios do Plano Prata</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Design completo de barba e bigode</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Prioridade máxima nos agendamentos</span>
-                            </li>
-                        </ul>
-                        
-                        <a href="#" class="w-full text-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition-colors duration-300">
-                            Assinar Agora
-                        </a>
-                    </div>
+                </div>
 
+                <!-- Barbeiro Tácio -->
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2 text-center md:text-left">
+                        <h4 class="text-4xl font-bold mb-4">Tácio - O Inovador Moderno</h4>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            Tácio é a energia jovem da nossa equipe. Antenado com as últimas tendências, ele é o especialista em cortes modernos, fades ousados e designs criativos. Se você busca um visual novo e cheio de personalidade, Tácio é o barbeiro certo.
+                        </p>
+                        <p class="text-gray-400 italic">"Gosto de quebrar o padrão. Cada corte é uma tela em branco, uma chance de criar algo que mostre quem a pessoa realmente é."</p>
+                    </div>
+                    <div class="md:order-1">
+                        <img src="https://placehold.co/600x700/334155/ffffff?text=Foto+do+Barbeiro+T%C3%A1cio" 
+                             alt="Foto do barbeiro Tácio"
+                             class="rounded-lg shadow-2xl w-full h-auto object-cover mx-auto max-w-md">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Barbearia Background Section -->
+        <section class="parallax-section py-32 md:py-48 text-center text-white" style="background-image: url('https://placehold.co/1920x1080/1a202c/4a5568?text=Foto+da+Barbearia');">
+            <div class="bg-black/60 py-16">
+                <div class="container mx-auto px-6">
+                    <h3 class="section-title text-4xl md:text-6xl font-bold">Um Ambiente Feito Para Você</h3>
+                    <p class="mt-4 text-xl max-w-3xl mx-auto">
+                        Nossa barbearia foi projetada para ser o seu refúgio. Um lugar para relaxar, tomar um café e sair com o visual renovado.
+                    </p>
                 </div>
             </div>
         </section>
+
+        <!-- Serviços / Planos Section -->
+        <section id="servicos" class="py-20 md:py-32 bg-gray-900/80 backdrop-blur-sm">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h3 class="section-title text-4xl md:text-6xl font-bold">Nossos <span class="accent-color">Serviços</span></h3>
+                    <p class="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">Do clássico ao moderno, temos o serviço perfeito para você. Conheça também nossos planos de assinatura e economize.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <!-- Serviço 1 -->
+                    <div class="service-card">
+                        <div class="service-card-icon accent-color">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-1">Corte Simples & Navalha</h4>
+                            <p class="text-gray-400">Acabamento preciso para um visual impecável no dia a dia.</p>
+                        </div>
+                    </div>
+                    <!-- Serviço 2 -->
+                    <div class="service-card">
+                        <div class="service-card-icon accent-color">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-1">Barba Modelada & Terapia</h4>
+                            <p class="text-gray-400">Toalha quente, óleos essenciais e design profissional.</p>
+                        </div>
+                    </div>
+                    <!-- Serviço 3 -->
+                    <div class="service-card">
+                        <div class="service-card-icon accent-color">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19 14.5M12 14.5v-5.714c0-.597.237-1.17.659-1.591L17.25 4.5M12 14.5L9.75 16.75M12 14.5L14.25 16.75M12 21a9 9 0 100-18 9 9 0 000 18z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-1">Corte & Cor</h4>
+                            <p class="text-gray-400">Coloração ou disfarce de brancos com produtos de alta qualidade.</p>
+                        </div>
+                    </div>
+                    <!-- Serviço 4 -->
+                    <div class="service-card">
+                        <div class="service-card-icon accent-color">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9 9 0 119 0zM16.5 18.75a9 9 0 00-9 0m9 0a9 9 0 01-9 0m9 0v-4.875c0-.621-.504-1.125-1.125-1.125H12.875c-.621 0-1.125.504-1.125 1.125V18.75m9 0a9 9 0 01-9 0" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-1">Planos de Assinatura</h4>
+                            <p class="text-gray-400">A melhor forma de manter seu estilo sempre em dia e economizar.</p>
+                        </div>
+                    </div>
+                </div>
+                 <a href="/planos" class="btn-primary mt-16 inline-block text-xl font-bold px-10 py-4 shadow-xl transform hover:scale-105 transition-transform">
+                    Conheça Nossos Planos
+                </a>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800">
-        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
-            <p>&copy; 2025 Kinho Barber. Todos os direitos reservados.</p>
-            <p class="text-sm mt-2">*Serviços ilimitados sujeitos à política de uso justo e disponibilidade de agenda.</p>
+    <footer id="contato" class="bg-gray-900 border-t border-white/10 py-16">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <h3 class="text-3xl font-bold text-white mb-4">Kinho Barber</h3>
+            <p>Rua da Barbearia, 123 - Centro, Sua Cidade</p>
+            <p>(71) 99999-8888</p>
+            <div class="mt-6">
+                <p>&copy; 2025 Kinho Barber. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            const themeSwitcherButtons = document.querySelectorAll('.theme-switcher button');
+            
+            // --- THEME SWITCHER LOGIC ---
+            function setTheme(theme) {
+                body.classList.remove('theme-classic', 'theme-urban', 'theme-rustic', 'theme-ninja');
+                body.classList.add(`theme-${theme}`);
+                
+                themeSwitcherButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.theme === theme) {
+                        btn.classList.add('active');
+                    }
+                });
+                localStorage.setItem('kinhoTheme', theme);
+            }
+
+            themeSwitcherButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setTheme(button.dataset.theme);
+                });
+            });
+
+            // Load saved theme or set default
+            const savedTheme = localStorage.getItem('kinhoTheme') || 'ninja';
+            setTheme(savedTheme);
+
+
+            // --- BACKGROUND CAROUSEL LOGIC ---
+            const carouselContainer = document.getElementById('bg-carousel');
+            const images = [
+                'https://placehold.co/1920x1080/333/fff?text=Corte+Moderno+1',
+                'https://placehold.co/1920x1080/444/fff?text=Barba+Desenhada',
+                'https://placehold.co/1920x1080/555/fff?text=Corte+Cl%C3%A1ssico',
+                'https://placehold.co/1920x1080/222/fff?text=Cliente+Satisfeito'
+            ];
+            let currentImageIndex = 0;
+
+            function changeBackgroundImage() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                carouselContainer.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+            }
+
+            // Initial image
+            carouselContainer.style.backgroundImage = `url('${images[0]}')`;
+            
+            // Change image every 5 seconds
+            setInterval(changeBackgroundImage, 5000);
+        });
+    </script>
 
 </body>
 </html>
